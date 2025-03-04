@@ -18,11 +18,7 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-import sys
-import os
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from models import Base
-target_metadata = Base.metadata
+target_metadata = None
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
@@ -69,7 +65,7 @@ def run_migrations_online() -> None:
 
     with connectable.connect() as connection:
         context.configure(
-            connection=connection, target_metadata=target_metadata, render_as_batch=True,
+            connection=connection, target_metadata=target_metadata
         )
 
         with context.begin_transaction():
